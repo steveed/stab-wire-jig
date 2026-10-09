@@ -9,8 +9,8 @@ wire-forming tool. The carriage slides along the bar and locks at the span you w
 engraved scale; the first leg sits in the block's slot, so the second bend lands the right distance
 from it every time.
 
-The design is generated from one parametric script: STEP files for a machine shop now, a dimensioned
-PDF drawing to follow.
+The design is generated from parametric scripts: STEP files and a dimensioned PDF drawing for a
+machine shop.
 
 ## How it works
 
@@ -26,7 +26,9 @@ clockwise, so two bends without the flip would give a Z, not a U):
 
 ## Parts
 
-`jig.py` (CadQuery) generates them; `make` writes STEP files and SVG views to `build/`.
+`jig.py` (CadQuery) generates them; `make model` writes STEP files and SVG views to `build/`, and
+`make drawing` writes the dimensioned shop drawing, `build/jig-drawing.pdf` (`drawing.py`, from the
+same parameters). For a machine shop, send the PDF and the three part STEP files.
 
 - **Bar:** 6061 aluminium, 350 x 40 x 15 mm: a 300 mm working length with a T-slot (6.5 mm throat,
   11 mm undercut) for M6 T-nuts and the scale engraved on its top, and a 25 mm bench tab at each end,
@@ -76,8 +78,7 @@ From the E/Z Bender and a finished wire (reference photos are kept locally, not 
 
 ## Status
 
-Model done; a dimensioned PDF drawing for the shop is next. The scale's 4.65 mm offset is to be
-confirmed with the first test bends.
+Model and shop drawing done. The scale's 4.65 mm offset is to be confirmed with the first test bends.
 
 ## License
 
