@@ -28,10 +28,12 @@ clockwise, so two bends without the flip would give a Z, not a U):
 
 `jig.py` (CadQuery) generates them; `make` writes STEP files and SVG views to `build/`.
 
-- **Bar:** 300 x 40 x 15 mm, 6061 aluminium, with a T-slot (6.5 mm throat, 11 mm undercut) for M6
-  T-nuts along its length, and the scale engraved on its top.
+- **Bar:** 6061 aluminium, 350 x 40 x 15 mm: a 300 mm working length with a T-slot (6.5 mm throat,
+  11 mm undercut) for M6 T-nuts and the scale engraved on its top, and a 25 mm bench tab at each end,
+  milled down to 5 mm (the T-slot's floor, so T-nuts still slide in from the left) with a 6.5 x 12 mm
+  slotted hole for a screw or bolt into the bench.
 - **Carriage:** 76 x 130 x 8 mm. The bender bolts to it through its two holes (101.14 mm apart,
-  tapped M4: check the bender's holes), its long axis across the bar. A tongue underneath rides in
+  tapped M4), its long axis across the bar. A tongue underneath rides in
   the slot to keep it square; two M6 thumb screws lock it. Its left edge is the scale's index.
 - **Block:** fixed on the right with two M5 screws from under the bar. Its top holds the wire at the
   bender's height: the floor of its grooves is 41.15 mm above the carriage, the height of the bottom
@@ -74,8 +76,8 @@ From the E/Z Bender and a finished wire (reference photos are kept locally, not 
 
 ## Status
 
-First model. To check before it goes to a shop: the bender's mounting thread, whether its handle
-clears the block as it swings, and the scale's offset (from the first test bends).
+Model done; a dimensioned PDF drawing for the shop is next. The scale's 4.65 mm offset is to be
+confirmed with the first test bends.
 
 ## License
 

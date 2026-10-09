@@ -35,6 +35,11 @@ BAR_L, BAR_W, BAR_H = 300.0, 40.0, 15.0
 SLOT_THROAT, SLOT_THROAT_D = 6.5, 5.0      # T-slot for M6 T-nuts: throat at the top...
 SLOT_UNDER, SLOT_UNDER_D = 11.0, 5.0       # ...and the wider undercut below it
 SLOT_END = 230.0                           # the slot runs from the left end to here
+# bench tabs: the bar runs on past each end, milled down to the T-slot's floor so T-nuts still slide
+# in from the left, with a slotted hole for a screw or bolt into the bench
+TAB_L = 25.0
+TAB_T = BAR_H - SLOT_THROAT_D - SLOT_UNDER_D
+TAB_SLOT = (12.0, 6.5)                     # slotted hole, along the bar
 
 # --- carriage (the bender bolts to it; it slides in the T-slot and locks with two thumb screws)
 CAR_X, CAR_Y, CAR_T = 76.0, 130.0, 8.0
@@ -69,6 +74,11 @@ def pivot_for(span):
 
 def bar():
     b = cq.Workplane('XY').box(BAR_L, BAR_W, BAR_H, centered=(False, True, False))
+    for x0 in (-TAB_L, BAR_L):                                  # bench tabs at both ends
+        tab = cq.Workplane('XY').box(TAB_L, BAR_W, TAB_T, centered=(False, True, False)).translate((x0, 0, 0))
+        hole = (cq.Workplane('XY').center(x0 + TAB_L / 2, 0).slot2D(TAB_SLOT[0], TAB_SLOT[1])
+                .extrude(TAB_T + 2).translate((0, 0, -1)))
+        b = b.union(tab.cut(hole))
     throat = (cq.Workplane('XY').workplane(offset=BAR_H - SLOT_THROAT_D)
               .center(SLOT_END / 2, 0).rect(SLOT_END, SLOT_THROAT).extrude(SLOT_THROAT_D + 1))
     under = (cq.Workplane('XY').workplane(offset=BAR_H - SLOT_THROAT_D - SLOT_UNDER_D)
