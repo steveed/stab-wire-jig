@@ -3,13 +3,45 @@
 A machinable jig for bending the wires of long keyboard stabilisers (6.25U, 7U, 8U and 9U space bars),
 which are hard to buy and usually bent by hand.
 
-The jig is an aluminium bar that holds two [Du-Bro E/Z Bender](https://www.dubro.com/products/e-z-bender-wire-forming-tool)
-wire-forming tools a set distance apart: one fixed at a datum, one on a carriage that pins into reamed
-holes for each span. Lay a straight wire in the bar's groove against the end stop, bend both legs, and
-the distance between the bends comes out right every time.
+The jig is an aluminium bar with a fixed block on the right that holds the wire, and a carriage on
+the left that carries a [Du-Bro E/Z Bender](https://www.dubro.com/products/e-z-bender-wire-forming-tool)
+wire-forming tool. The carriage slides along the bar and locks at the span you want, read off an
+engraved scale; the first leg sits in the block's slot, so the second bend lands the right distance
+from it every time.
 
-The design will be generated from one parametric script, with a dimensioned PDF drawing, a DXF of the
-hole pattern and a STEP model for a machine shop.
+The design is generated from one parametric script: STEP files for a machine shop now, a dimensioned
+PDF drawing to follow.
+
+## How it works
+
+One bender, used twice, with the wire turned over between the bends (the E/Z Bender only bends
+clockwise, so two bends without the flip would give a Z, not a U):
+
+1. Bend the first leg: lay the straight wire through the block's straight groove and the bender, and
+   bend. (Or bend it freehand.)
+2. Turn the wire over and lay that leg in the block's cross slot, pointing towards you, with the
+   wire along the straight groove and through the bender.
+3. Clamp it with the block's screw and washer, set the carriage to the span on the scale, lock it,
+   and bend the second leg.
+
+## Parts
+
+`jig.py` (CadQuery) generates them; `make` writes STEP files and SVG views to `build/`.
+
+- **Bar:** 300 x 40 x 15 mm, 6061 aluminium, with a T-slot (6.5 mm throat, 11 mm undercut) for M6
+  T-nuts along its length, and the scale engraved on its top.
+- **Carriage:** 76 x 130 x 8 mm. The bender bolts to it through its two holes (101.14 mm apart,
+  tapped M4: check the bender's holes), its long axis across the bar. A tongue underneath rides in
+  the slot to keep it square; two M6 thumb screws lock it. Its left edge is the scale's index.
+- **Block:** fixed on the right with two M5 screws from under the bar. Its top holds the wire at the
+  bender's height: the floor of its grooves is 41.15 mm above the carriage, the height of the bottom
+  of the bender's wire slot above its base. It has a straight groove along the wire's line and a
+  cross slot for the bent leg, both 1.2 mm deep so the 1.5 mm wire stands proud, and a tapped M5 hole
+  where a screw and fender washer clamp the wire in both.
+- **Scale:** reads the span between leg centres at the carriage's left edge, every millimetre from 95
+  to 160 mm, with the four spans marked. It assumes the second leg forms 4.65 mm (half the 7.8 mm pin
+  plus half the wire) from the pivot towards the block; check it with the first bends and mark your
+  own positions.
 
 ## Spans
 
@@ -31,18 +63,19 @@ From 7U up the span is (n - 1) x 19.05 mm. The bar is engraved with each span's 
 1.45-2.40 mm range (SKU 481) and under Du-Bro's 0.062" limit for hardened wire. A 9U wire needs about
 152 mm plus two legs, so one rod makes one wire.
 
-## To measure
+## Measured
 
-Photos and measurements go in [`photos/`](photos/):
+From the E/Z Bender and a finished wire (reference photos are kept locally, not in the repo):
 
-- the E/Z Bender's base: footprint, mounting holes (size and spacing), and the wire's height above the
-  base;
-- which way it bends: where the bend forms relative to the tool (a photo mid-bend);
-- a finished wire: leg length, and any bend at the tips.
+- mounting holes 101.14 mm apart, the pivot exactly midway; overall length 115.58 mm, 41.21 mm wide;
+- 41.15 mm from the bottom of its base to the bottom of the wire slot between its pins;
+- centre pin 7.8 mm, the opening between the pins 2.2 mm; it bends clockwise only;
+- legs 12.05 mm (tip to the outside of the long bar).
 
 ## Status
 
-Collecting measurements; no design yet.
+First model. To check before it goes to a shop: the bender's mounting thread, whether its handle
+clears the block as it swings, and the scale's offset (from the first test bends).
 
 ## License
 

@@ -1,0 +1,10 @@
+services:
+  cad:
+    build: tools
+    platform: linux/amd64     # cadquery's OCP wheels are x86_64
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp
+    working_dir: /repo
+    volumes:
+      - .:/repo
